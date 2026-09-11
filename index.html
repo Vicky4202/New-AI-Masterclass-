@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Piping BOM-MTO Builder</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="top-bar">
+      <div>
+        <h1>Piping BOM-MTO Builder</h1>
+        <p class="subtitle">
+          Static web app for preparing piping BOM/MTO rows from refinery piping material specification data.
+        </p>
+      </div>
+      <div class="top-actions">
+        <button class="theme-toggle no-print" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+          <span class="theme-icon" aria-hidden="true"></span>
+          <span class="sr-only" id="theme-toggle-label">Switch to dark mode</span>
+        </button>
+        <div class="status-pill" id="dataStatus">Loading pipe class data...</div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2 class="panel-title">Project Details</h2>
+      <div class="project-grid">
+        <div>
+          <label for="projectTitle">Document Title</label>
+          <input id="projectTitle" value="Piping Bill of Material (BOM)">
+        </div>
+        <div>
+          <label for="mocDescription">Project / MOC Description</label>
+          <input id="mocDescription" value="Crude unloading facility">
+        </div>
+        <div>
+          <label for="clientName">MOC No./ Job No.</label>
+          <input id="clientName" value="NRMT-2016-00329">
+        </div>
+        <div>
+          <label for="pipeClass">Pipe Class</label>
+          <select id="pipeClass">
+            <option value="A1A">A1A</option>
+            <option value="A1F">A1F</option>
+            <option value="A1K">A1K</option>
+            <option value="A1N">A1N</option>
+            <option value="A1Z">A1Z</option>
+            <option value="A2A">A2A</option>
+            <option value="A3A">A3A</option>
+            <option value="A3Y">A3Y</option>
+            <option value="A4F">A4F</option>
+            <option value="A5A">A5A</option>
+            <option value="A6N">A6N</option>
+            <option value="A9A">A9A</option>
+            <option value="A10A">A10A</option>
+            <option value="A15A">A15A</option>
+            <option value="A16A">A16A</option>
+            <option value="A19A">A19A</option>
+            <option value="A20A">A20A</option>
+            <option value="A21A">A21A</option>
+            <option value="A22A">A22A</option>
+            <option value="A23A">A23A</option>
+            <option value="B1A">B1A</option>
+            <option value="B1F">B1F</option>
+            <option value="B1K">B1K</option>
+            <option value="B1N">B1N</option>
+            <option value="B2A">B2A</option>
+            <option value="B3A">B3A</option>
+            <option value="B4D">B4D</option>
+            <option value="B4D1">B4D1</option>
+            <option value="B4F">B4F</option>
+            <option value="B4F1">B4F1</option>
+            <option value="B5A">B5A</option>
+            <option value="B5D">B5D</option>
+            <option value="B6N">B6N</option>
+            <option value="B9A">B9A</option>
+            <option value="B19A">B19A</option>
+            <option value="B21N">B21N</option>
+            <option value="B22A">B22A</option>
+            <option value="B22M">B22M</option>
+            <option value="B23A">B23A</option>
+            <option value="B25A">B25A</option>
+            <option value="B25K">B25K</option>
+            <option value="B26A">B26A</option>
+            <option value="D1A">D1A</option>
+            <option value="D1K">D1K</option>
+            <option value="D2A">D2A</option>
+            <option value="D2D">D2D</option>
+            <option value="D4F">D4F</option>
+            <option value="D5A">D5A</option>
+            <option value="D5D">D5D</option>
+            <option value="D5E">D5E</option>
+            <option value="D15K">D15K</option>
+            <option value="D21A">D21A</option>
+            <option value="D25A">D25A</option>
+            <option value="D26A">D26A</option>
+            <option value="E5E">E5E</option>
+            <option value="E25A">E25A</option>
+            <option value="E26A">E26A</option>
+            <option value="F5A">F5A</option>
+            <option value="F15M">F15M</option>
+            <option value="F25A">F25A</option>
+            <option value="F25D">F25D</option>
+            <option value="F26D">F26D</option>
+            <option value="F27A">F27A</option>
+            <option value="G5M">G5M</option>
+            <option value="G21A">G21A</option>
+            <option value="G22A">G22A</option>
+            <option value="G25N">G25N</option>
+          </select>
+        </div>
+        <div>
+          <label for="preparedBy">Prepared By</label>
+          <input id="preparedBy" value="Engineering &amp; Estimation Dept.">
+        </div>
+        <div>
+          <label for="revision">Revision</label>
+          <input id="revision" value="0">
+        </div>
+        <div>
+          <label for="referenceDoc">Reference</label>
+          <input id="referenceDoc" value="PMS for NRL - Piping Class A1A">
+        </div>
+        <div>
+          <label for="exportFileName">Export File Name</label>
+          <input id="exportFileName" value="A1A_Piping_BOM_MTO_NRMT-2016-00329">
+        </div>
+      </div>
+    </section>
+
+    <section class="panel bom-input-panel compact-panel">
+      <div class="input-heading">
+        <h2 class="panel-title">BOM Input Rows</h2>
+        <div class="preview-confirmation no-print" id="previewConfirmation" aria-live="polite"></div>
+      </div>
+      <div class="input-toolbar">
+        <div>
+          <label for="groupSelect">Filter by Group</label>
+          <select id="groupSelect"></select>
+        </div>
+        <div class="note" style="margin-top:0;">
+          See BOM Preview below.
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="input-table" aria-label="BOM input table">
+          <thead>
+            <tr>
+              <th class="wide-col">Items</th>
+              <th class="small-col">Size (inch)</th>
+              <th class="small-col">Quantity</th>
+              <th class="small-col">Unit (M/NOS)</th>
+              <th class="action-col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="inputBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="preview-title">
+        <h2 class="panel-title">BOM Preview</h2>
+        <div class="button-row no-print" style="margin-top:0;">
+          <button class="btn-secondary" id="printBtn" type="button">Print / Save as PDF</button>
+          <button class="btn-primary" id="exportBtn" type="button">Download Excel File</button>
+        </div>
+      </div>
+      <div class="source-text" id="sourceText"></div>
+      <div id="specNotice"></div>
+      <div id="previewArea"></div>
+    </section>
+  </main>
+
+  <script src="src/pipe-spec-data.js?v=20260811-b1f-source-limit"></script>
+  <script src="src/wn-flange-data.js?v=20260625-design-theme"></script>
+  <script src="src/slip-on-blind-flange-data.js?v=20260625-design-theme"></script>
+  <script src="src/app.js?v=20260811-b1f-source-limit"></script>
+</body>
+</html>
+
